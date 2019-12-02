@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  RED.nodes.registerType('slack-web',{
+	category: 'output',
+	color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+			token: {
+				value: '',
+			}
+    },
+    inputs:1,
+    outputs:1,
+    icon: "arrow-in.png",
+    label: function() {
+      return this.name||"Slack Web";
+    }
+  });
+  RED.nodes.registerType('slack-interact',{
+	category: 'input',
+	color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+    },
+    inputs:0,
+    outputs:1,
+    icon: "arrow-in.png",
+    label: function() {
+      return this.name||"Slack Interact";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="slack-interact">
+  <div class="form-row">
+		<label for="node-input-name"><i class="icon-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="slack-interact">
+  <p>A simple node that converts the message payloads into all typeform-webhook characters</p>
+</script>
+
+
+<script type="text/x-red" data-template-name="slack-web">
+  <div class="form-row">
+		<label for="node-input-name"><i class="icon-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+		<label for="node-input-token"><i class="icon-globe"></i> Token</label>
+		<input type="text" id="node-input-token" placeholder="Token">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="slack-web">
+  <p>A simple node that converts the message payloads into all typeform-webhook characters</p>
+</script>
+
