@@ -9,15 +9,17 @@ module.exports = function(RED) {
 		this.on('input', async msg => {
 			if(!msg.payload.token) return this.error('You must provide a valid token');
 			try{
-				const users = await web.users.list({token: 'xoxb-567903179857-642532954099-phQkialIJkImYPPMPKA8fMuC'});
-				const {id: user} = users.members.find(user => user.name === 'jb');
-				const im = await web.im.open({
-					token: msg.payload.token,
-					user
-				});
-				msg.payload.channel = im.channel.id;
+				const {token, user} = msg.payload;
+				if(user) {
+					const im = await web.im.open({
+						token,
+						user
+					});
+					msg.payload.channel = im.channel.id;
+				}
 				msg.payload = await web.chat.postMessage(msg.payload);
 			} catch(e) {
+				console.error(e);
 				this.error(e.data, msg);
 			}
 			this.send(msg);
